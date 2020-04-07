@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header class="container">
         <div class="logo">
             <nuxt-link to="/">Joel Krause</nuxt-link>
         </div>
@@ -14,5 +14,6 @@ header{
     padding:2rem;
     display: flex;
     justify-content: space-between;
+    font-weight: bold;
 }
 </style>
