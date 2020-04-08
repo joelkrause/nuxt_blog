@@ -28,7 +28,7 @@ export default {
    ** Customize the progress-bar color
    */
   loading: {
-    color: '#000'
+    color: '#27ae60'
   },
   pageTransition: {
     name: "default",

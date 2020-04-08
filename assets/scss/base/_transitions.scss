@@ -8,5 +8,6 @@
 .default-enter,
 .default-leave-to {
     transform: translateY(10px);
+    filter:blur(10px);
     opacity: 0;
 }
