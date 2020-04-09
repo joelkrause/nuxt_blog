@@ -4,7 +4,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || '',
+    titleTemplate: `%s - Joel Krause`,
     meta: [{
         charset: 'utf-8'
       },
@@ -12,17 +12,14 @@ export default {
         name: 'viewport',
         content: 'width=device-width, initial-scale=1'
       },
+
+      // hid is used as unique identifier. Do not use `vmid` for it as it will not work
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
+        content: 'I\'m a frontend web developer from Melbourne. I build lightning fast websites with nuxt and storyblok.'
       }
-    ],
-    link: [{
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: '/favicon.ico'
-    }]
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -43,7 +40,9 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    // `~/plugins/posts.server.js`
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -54,6 +53,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    'nuxt-lazy-load',
     ['storyblok-nuxt', {
       accessToken: 'tbAe2yUuAeSfdRfLo0qZugtt',
       cacheProvider: 'memory'

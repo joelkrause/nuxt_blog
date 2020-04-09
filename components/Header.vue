@@ -1,7 +1,7 @@
 <template>
     <header>
         <div class="logo">
-            <nuxt-link to="/">Joel Krause.</nuxt-link>
+            <nuxt-link to="/">Joel Krause</nuxt-link>
         </div>
         <nav>
             <nuxt-link to="/">Home</nuxt-link>

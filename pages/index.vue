@@ -5,9 +5,8 @@
         <img src="/images/joel.png"/>
       </div>
       <div class="content">
-        <p>Hey, I'm Joel. I build lightning ⚡️ fast websites with nuxt.js and storyblok.</p>
-        <p>I currently work at Raak Creative.</p>
-        <nuxt-link to="/contact" class="button">Get In Touch</nuxt-link>
+        <div v-if="homeContent" v-html="this.$storyapi.richTextResolver.render(homeContent.content.hero_content)"></div>
+        <nuxt-link to="/contact" class="button">Get in Touch</nuxt-link>
       </div>
     </div>
     <header class="post_header">
@@ -18,7 +17,7 @@
         <nuxt-link class="post" v-for="post in posts" :key="post.index" :to="`/posts/${post.slug}`">
             <div class="post-date">{{post.created_at}}</div>
             <div class="post-name">{{post.name}}</div>
-            <div class="post-categories">
+            <div class="categories">
               <div v-for="category in post.content.categories" :key="category.index" class="category" :style="`background-color:${category.color};`">
                 {{category.title}}
               </div>
@@ -38,8 +37,17 @@ export default {
   },
   async asyncData (context) {
       const { data } = await context.app.$storyapi.get(`cdn/stories/`,{starts_with:`posts`,per_page: 6})
-      return { posts: data.stories }
-  }
+      let home = await context.app.$storyapi.get(`cdn/stories/home`)
+      return {
+        posts: data.stories,
+        homeContent: home.data.story
+      }
+  },
+  head () {
+      return {
+      title: 'Home',
+      }
+  },
 }
 </script>
 
@@ -81,18 +89,6 @@ export default {
       &:hover{
         box-shadow: 0 5px 10px rgba(#000,0.35);
         transform: translateY(-10px);
-      }
-      &-categories{
-        display: flex;
-        .category{
-          font-size: 0.775rem;
-          border-radius: 2px;
-          padding: 0.175rem 0.25rem;
-          letter-spacing: 0.5px;
-          &:not(:last-of-type){
-            margin-right: 0.5rem;
-          }
-        }
       }
       &-date{
         font-size: 0.775rem;
