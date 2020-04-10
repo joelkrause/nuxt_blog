@@ -9,10 +9,11 @@
 
 <script>
 export default {
-    async asyncData (context) {
-        const { data } = await context.app.$storyapi.get(`cdn/stories/`,{starts_with:`posts`})
-        return { posts: data.stories }
+  computed:{
+    home(){
+      return this.$store.state.posts.posts.find(el => el.slug === 'home');
     }
+  },
 }
 </script>
 
