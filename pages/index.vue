@@ -5,7 +5,7 @@
         <img src="/images/joel.png"/>
       </div>
       <div class="content">
-        <div v-if="homeContent" v-html="this.$storyapi.richTextResolver.render(homeContent.content.hero_content)"></div>
+        <div v-html="$storyapi.richTextResolver.render(home.content.hero_content)"></div>
         <nuxt-link to="/contact" class="button">Get in Touch</nuxt-link>
       </div>
     </div>
@@ -17,7 +17,7 @@
         <nuxt-link class="post" v-for="post in posts" :key="post.index" :to="`/posts/${post.slug}`">
             <div class="post-date">{{post.created_at}}</div>
             <div class="post-name">{{post.name}}</div>
-            <div class="categories">
+            <div class="categories" v-if="post.content.categories">
               <div v-for="category in post.content.categories" :key="category.index" class="category" :style="`background-color:${category.color};`">
                 {{category.title}}
               </div>
@@ -28,20 +28,14 @@
 </template>
 
 <script>
-import moment from 'moment'
-import Category from '~/components/global/Category';
-
 export default {
-  components:{
-    Category
-  },
-  async asyncData (context) {
-      const { data } = await context.app.$storyapi.get(`cdn/stories/`,{starts_with:`posts`,per_page: 6})
-      let home = await context.app.$storyapi.get(`cdn/stories/home`)
-      return {
-        posts: data.stories,
-        homeContent: home.data.story
-      }
+  computed:{
+    posts(){
+      return this.$store.state.posts.posts;
+    },
+    home(){
+      return this.$store.state.posts.posts.find(el => el.slug === 'home');
+    }
   },
   head () {
       return {

@@ -41,7 +41,7 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    // `~/plugins/posts.server.js`
+    `~/plugins/posts.server.js`
   ],
   /*
    ** Nuxt.js dev-modules
@@ -53,7 +53,6 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    'nuxt-lazy-load',
     ['storyblok-nuxt', {
       accessToken: 'tbAe2yUuAeSfdRfLo0qZugtt',
       cacheProvider: 'memory'

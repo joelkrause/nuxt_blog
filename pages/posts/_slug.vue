@@ -16,10 +16,7 @@
                 hey this is a piece of info to describe the blog post
             </div>
         </header>
-        <div class="content" v-html="body"></div>
-        <pre>
-        <!-- {{story}} -->
-        </pre>
+        <div class="content" v-html="storyBody">{{storyBody}}</div>
     </article>
 </template>
 
@@ -55,32 +52,24 @@ import moment from 'moment'
 
 export default {
     computed: {
-        body() {
-            return this.story ? this.$storyapi.richTextResolver.render(this.story.content.body) : ''
+        posts() {
+            return this.$store.state.posts.posts;
         },
-        date(){
-            return moment(this.story.created_at).format('dddd Do MMMM YYYY')
+        story() {
+            return this.posts.find(el => el.slug === this.slug);
         },
-        difference(){
-            return moment(this.story.created_at).startOf().fromNow()
+        storyBody(){
+            return this.$storyapi.richTextResolver.render(this.story.content.body)
         }
     },
-    data () {
+    data() {
         return {
-            story: { content: {} }}
+            slug: this.$route.params.slug,
+            
+        };
     },
-    asyncData (context) {
-        // Check if we are in the editor mode
-        let version = context.query._storyblok || context.isDev ? 'draft' : 'published'
-
-        // Load the JSON from the API
-        return context.app.$storyapi.get(`cdn/stories/posts/${context.params.slug}`, {
-        version: version
-        }).then((res) => {
-        return res.data
-        }).catch((res) => {
-        context.error({ statusCode: res.response.status, message: res.response.data })
-        })
+    created() {
+        this.$store.dispatch("posts/getPosts");
     },
     head () {
         return {

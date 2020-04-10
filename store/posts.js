@@ -9,20 +9,9 @@ export const mutations = {
 }
 
 export const actions = {
-    async getPosts({
-        state,
-        commit,
-        dispatch,
-        context
-    }) {
-        const {
-            data
-        } = await this.$storyapi.get(`cdn/stories/`, {
-            starts_with: `posts`,
-            per_page: 500
-        }).then(() => {
-            posts = data.stories
-            commit("updatePosts", posts)
+    getPosts({ commit }, context) {
+        return this.$storyapi.get(`cdn/stories`).then((res) => {
+            commit('updatePosts', res.data.stories)
         })
     }
-}
+  }
