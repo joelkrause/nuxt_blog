@@ -40,6 +40,9 @@ export default {
         return this.$storyapi.richTextResolver.render(this.home.content.hero_content)
     }
   },
+  created() {
+    this.$store.dispatch("posts/getPosts");
+  },
   head () {
       return {
       title: 'Home',
