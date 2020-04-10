@@ -16,7 +16,7 @@
                 hey this is a piece of info to describe the blog post
             </div>
         </header>
-        <div class="content" v-html="story.content.body"></div>
+        <div class="content" v-html="richtext"></div>
     </article>
 </template>
 
@@ -55,6 +55,9 @@ export default {
         },
         story() {
             return this.posts.find(el => el.slug === this.slug);
+        },
+        richtext() {
+            return this.$storyapi.richTextResolver.render(this.story.content.body)
         }
     },
     data() {

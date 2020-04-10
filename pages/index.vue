@@ -5,7 +5,7 @@
         <img src="/images/joel.png"/>
       </div>
       <div class="content">
-        <div v-html="home.content.hero_content"></div>
+        <div v-html="richtext"></div>
         <nuxt-link to="/contact" class="button">Get in Touch</nuxt-link>
       </div>
     </div>
@@ -35,6 +35,9 @@ export default {
     },
     home(){
       return this.$store.state.posts.posts.find(el => el.slug === 'home');
+    },
+    richtext() {
+        return this.$storyapi.richTextResolver.render(this.home.content.hero_content)
     }
   },
   head () {
