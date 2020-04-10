@@ -5,7 +5,7 @@
         <img src="/images/joel.png"/>
       </div>
       <div class="content">
-        <div v-html="$storyapi.richTextResolver.render(home.content.hero_content)"></div>
+        <div v-html="home.content.hero_content"></div>
         <nuxt-link to="/contact" class="button">Get in Touch</nuxt-link>
       </div>
     </div>

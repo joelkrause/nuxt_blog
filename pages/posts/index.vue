@@ -10,9 +10,9 @@
 <script>
 export default {
   computed:{
-    home(){
-      return this.$store.state.posts.posts.find(el => el.slug === 'home');
-    }
+    posts(){
+      return this.$store.state.posts.posts;
+    },
   },
 }
 </script>

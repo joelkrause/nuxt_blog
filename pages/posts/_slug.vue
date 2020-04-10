@@ -16,7 +16,7 @@
                 hey this is a piece of info to describe the blog post
             </div>
         </header>
-        <div class="content" v-html="storyBody">{{storyBody}}</div>
+        <div class="content" v-html="story.content.body"></div>
     </article>
 </template>
 
@@ -48,8 +48,6 @@ header{
 </style>
 
 <script>
-import moment from 'moment'
-
 export default {
     computed: {
         posts() {
@@ -57,9 +55,6 @@ export default {
         },
         story() {
             return this.posts.find(el => el.slug === this.slug);
-        },
-        storyBody(){
-            return this.$storyapi.richTextResolver.render(this.story.content.body)
         }
     },
     data() {
