@@ -14,6 +14,10 @@
 <style lang="scss" scoped>
 footer{
     padding: 2rem 0;
+    font-size: 0.875rem;
+    @include breakpoint(up,tablet-landscape){
+        font-size: 1rem;
+    }
     .container{
         display: flex;
         justify-content: space-between;

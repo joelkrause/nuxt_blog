@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.9.7",
+    "@nuxtjs/style-resources": "^1.0.0",
     "nuxt": "^2.0.0",
     "storyblok-nuxt": "^1.2.0"
   },

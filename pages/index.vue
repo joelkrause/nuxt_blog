@@ -13,35 +13,27 @@
       <h2>Latest Posts</h2>
       <nuxt-link to="/posts">See All Posts</nuxt-link>
     </header>
-    <section class="posts" v-if="posts">
-        <nuxt-link class="post" v-for="post in posts" :key="post.index" :to="`/posts/${post.slug}`">
-            <div class="post-date">{{post.created_at}}</div>
-            <div class="post-name">{{post.name}}</div>
-            <div class="categories" v-if="post.content.categories">
-              <div v-for="category in post.content.categories" :key="category.index" class="category" :style="`background-color:${category.color};`">
-                {{category.title}}
-              </div>
-            </div>
-        </nuxt-link>
-    </section>
+    <Posts layout="grid"/>
   </main>
 </template>
 
 <script>
+import Posts from '~/components/global/Posts'
+
 export default {
+  components:{
+    Posts
+  },
   computed:{
-    posts(){
-      return this.$store.state.posts.posts;
-    },
     home(){
-      return this.$store.state.posts.posts.find(el => el.slug === 'home');
+      return this.$store.state.pages.pages.find(el => el.slug === 'home');
     },
     richtext() {
         return this.$storyapi.richTextResolver.render(this.home.content.hero_content)
     }
   },
   created() {
-    this.$store.dispatch("posts/getPosts");
+    this.$store.dispatch("pages/getPages");
   },
   head () {
       return {
@@ -53,59 +45,31 @@ export default {
 
 <style lang="scss" scoped>
 .home_hero{
-  /* width: 50%; */
+  padding:10vw 0;
   min-height: 20vw;
-  padding:5vw 0;
-  display: flex;
-  align-items: center;
-  /* flex-direction: column; */
-  /* justify-content: center; */
+
+  @include breakpoint(up, tablet-landscape){
+    padding:5vw 0;
+    display: flex;
+    align-items: center;
+  }
   .content{
-    padding-left: 3rem;
-    max-width: 35%;
+    padding:2rem 0;
+    @include breakpoint(up, tablet-landscape){
+      max-width: 50%;
+      padding:0 0 0 5rem;        
+    }
   }
   img{
-    width: 12.5vw;
+    width: 25vw;
+    @include breakpoint(up, tablet-landscape){
+      width: 15vw;
+    }
   }
 }
 .post_header{
   display: flex;
   justify-content: space-between;
-}
-.posts{
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    border-top: 1px solid #212121;
-    padding-top: 25px;
-    .post{
-      border-radius: 3px;
-      padding: 1rem;
-      border: 1px solid #212121;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.35s;
-      &:hover{
-        box-shadow: 0 5px 10px rgba(#000,0.35);
-        transform: translateY(-10px);
-      }
-      &-date{
-        font-size: 0.775rem;
-      }
-      &-name{
-        padding:1rem 0;
-      }
-      &-continue{
-        margin-top: auto;
-        a{
-          font-size: 0.775rem;
-          font-weight: bold;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-        }
-      }
-    }
 }
 h2{
   margin:0 0 25px;

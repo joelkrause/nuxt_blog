@@ -37,11 +37,17 @@ export default {
   css: [
     '@/assets/scss/app.scss'
   ],
+  styleResources: {
+    scss: [
+      'assets/scss/utils/_functions.scss',
+    ]
+  },
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
-    `~/plugins/posts.server.js`
+    `~/plugins/posts.server.js`,
+    `~/plugins/pages.server.js`,
   ],
   /*
    ** Nuxt.js dev-modules
@@ -53,6 +59,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/style-resources',
     ['storyblok-nuxt', {
       accessToken: 'tbAe2yUuAeSfdRfLo0qZugtt',
       cacheProvider: 'memory'

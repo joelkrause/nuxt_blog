@@ -2,15 +2,15 @@
     <article class="container">
         <header>
             <h1>{{story.name}}</h1>
+            <div class="categories">
+              <div v-for="category in story.tag_list" class="category" :key="category.index">
+                {{category}}
+              </div>
+            </div>
             <div class="date">
                 <div>Published on {{date}}</div>
                 <div class="sep"></div>
                 <div>Updated {{difference}}</div>
-            </div>
-            <div class="categories">
-              <div v-for="category in story.content.categories" :key="category.index" class="category" :style="`background-color:${category.color};`">
-                {{category.title}}
-              </div>
             </div>
             <div class="excerpt">
                 hey this is a piece of info to describe the blog post
@@ -42,7 +42,7 @@ header{
         color: #ccc;
     }
     .categories{
-        margin:1rem 0 0;
+        margin:0 0 1rem;
     }
 }
 </style>

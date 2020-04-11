@@ -15,10 +15,13 @@
 header{
     position: sticky;
     top:0;
-    padding:2rem 2rem 0;
+    padding:1rem 1rem 0;
     display: flex;
     justify-content: space-between;
     font-weight: bold;
+    @include breakpoint(up, tablet-landscape){
+        padding:3rem 3rem 0;
+    }
     nav{
         display: flex;
         a{

@@ -1,12 +1,16 @@
 body {
-    background: #121212;
-    color: #fff;
+    background: var(--accent-color);
+    color: var(--text-color);
 }
 
 .container {
-    max-width: 65vw;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
+    
+    @include breakpoint(up, tablet-landscape) {
+        padding: 0 2rem;
+        max-width: 65vw;
+    }
 }
 
 .categories {
@@ -14,8 +18,8 @@ body {
 
     .category {
         font-size: 0.775rem;
+        text-transform: uppercase;
         border-radius: 2px;
-        padding: 0.175rem 0.25rem;
         letter-spacing: 0.5px;
 
         &:not(:last-of-type) {
