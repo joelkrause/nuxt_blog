@@ -60,8 +60,11 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
+    '@nuxtjs/moment',
+    'nuxt-lazy-load',
+    'nuxt-svg-loader',
     ['storyblok-nuxt', {
-      accessToken: 'tbAe2yUuAeSfdRfLo0qZugtt',
+      accessToken: 'sZUcBEZiCUQNtT3CQAZrzgtt',
       cacheProvider: 'memory'
     }]
   ],

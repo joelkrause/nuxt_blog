@@ -27,3 +27,14 @@ $breakpoints: (mobile: 480px,
     //Default font size on html element is 100%, equivalent to 16px;
     @return #{$remSize}rem;
 }
+
+// H Tags
+@function headings($from:1, $to:6) {
+    @if $from==$to {
+        @return 'h#{$from}';
+    }
+
+    @else {
+        @return 'h#{$from},'+headings($from+1, $to);
+    }
+}

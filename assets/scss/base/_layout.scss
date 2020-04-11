@@ -1,12 +1,16 @@
 body {
-    background: var(--accent-color);
+    background: var(--bg-color);
     color: var(--text-color);
+}
+
+::selection{
+    background-color: #000;
 }
 
 .container {
     margin: 0 auto;
     padding: 0 1rem;
-    
+
     @include breakpoint(up, tablet-landscape) {
         padding: 0 2rem;
         max-width: 65vw;

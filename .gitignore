@@ -4,3 +4,6 @@ node_modules/
 
 .now
 dist
+
+# Local Netlify folder
+.netlify

@@ -1,22 +1,16 @@
 <template>
-    <article class="container">
-        <header>
+    <article class="post container">
+        <header class="hero">
+            <img v-if="story.content.post_icon" :src="story.content.post_icon" class="post_icon"/>
             <h1>{{story.name}}</h1>
-            <div class="categories">
-              <div v-for="category in story.tag_list" class="category" :key="category.index">
-                {{category}}
-              </div>
-            </div>
             <div class="date">
-                <div>Published on {{date}}</div>
+                <div>Published on {{$moment(story.created_at).format('dddd Do MMMM YYYY')}}</div>
                 <div class="sep"></div>
-                <div>Updated {{difference}}</div>
+                <div>Updated about {{$moment(story.published_at).startOf().fromNow()}}</div>
             </div>
-            <div class="excerpt">
-                hey this is a piece of info to describe the blog post
-            </div>
+            <div class="excerpt" v-if="story.content.excerpt" v-html="excerpt"></div>
         </header>
-        <div class="content" v-html="richtext"></div>
+        <div class="content" v-if="story.content.body" v-html="richtext"></div>
     </article>
 </template>
 
@@ -24,25 +18,31 @@
 header{
     min-height: 20vw;
     padding:5vw 0;
+    margin: 0 0 5vw;
     display: flex;
     flex-direction: column;
     .date{
         display: flex;
         align-items: flex-start;
         font-size: 0.775rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
         .sep{
-            padding:0 10px;
+            padding:0 5px;
         }
     }
     .excerpt{
-        margin:5rem 0 0;
-        max-width: 50%;
-        color: #ccc;
+        margin:2.5rem 0 0;
+        max-width: 65%;
+        color: #999;
     }
     .categories{
         margin:0 0 1rem;
+    }
+    .post{
+        &_icon{
+            max-width: 3rem;
+            height: auto;
+            margin:0 0 1rem;
+        }
     }
 }
 </style>
@@ -57,7 +57,10 @@ export default {
             return this.posts.find(el => el.slug === this.slug);
         },
         richtext() {
-            return this.$storyapi.richTextResolver.render(this.story.content.body)
+            return this.story.content ? this.$storyapi.richTextResolver.render(this.story.content.body) : ''
+        },
+        excerpt(){
+            return this.story.content.excerpt ? this.$storyapi.richTextResolver.render(this.story.content.excerpt) : ''
         }
     },
     data() {

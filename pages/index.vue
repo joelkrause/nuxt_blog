@@ -1,19 +1,22 @@
 <template>
-  <main class="container">
-    <div class="home_hero">
-      <div class="image">
-        <img src="/images/joel.png"/>
-      </div>
-      <div class="content">
-        <div v-html="richtext"></div>
-        <nuxt-link to="/contact" class="button">Get in Touch</nuxt-link>
+  <main>
+    <div class="hero home_hero">
+      <div class="container">
+        <div class="image">
+          <img src="/images/joel.png"/>
+        </div>
+        <div class="content">
+          <div v-html="richtext"></div>
+        </div>
       </div>
     </div>
-    <header class="post_header">
-      <h2>Latest Posts</h2>
-      <nuxt-link to="/posts">See All Posts</nuxt-link>
-    </header>
-    <Posts layout="grid"/>
+    <div class="container">
+      <header class="post_header">
+        <h2>Latest Posts</h2>
+        <nuxt-link to="/posts">See All Posts</nuxt-link>
+      </header>
+      <Posts layout="list" amount="6"/>
+    </div>
   </main>
 </template>
 
@@ -45,18 +48,20 @@ export default {
 
 <style lang="scss" scoped>
 .home_hero{
-  padding:10vw 0;
   min-height: 20vw;
-
-  @include breakpoint(up, tablet-landscape){
-    padding:5vw 0;
-    display: flex;
-    align-items: center;
+  margin: 0 0 5vw;
+  .container{    
+    padding:10vw 0;
+    @include breakpoint(up, tablet-landscape){
+      padding:5vw 0;
+      display: flex;
+      align-items: center;
+    }
   }
   .content{
     padding:2rem 0;
     @include breakpoint(up, tablet-landscape){
-      max-width: 50%;
+      max-width: 65%;
       padding:0 0 0 5rem;        
     }
   }

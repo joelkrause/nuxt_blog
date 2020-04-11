@@ -1,90 +1,127 @@
 <template>
-    <section class="posts" v-if="posts" :data-layout="layout">
-        <nuxt-link class="post" v-for="post in posts" :key="post.index" :to="`/posts/${post.slug}`">
-            <div class="post-date">{{post.created_at}}</div>
-            <div class="post-name">{{post.name}}</div>
-            <div class="categories" v-if="post.content.categories">
-              <div v-for="category in post.tag_list" :key="category.index" class="category" :style="`background-color:${category.color};`">
-                {{category}}
+  <main>
+      <div class="filter" v-if="include_search">
+        <input type="search" placeholder="Search posts...">
+        <div class="filters" v-for="tag in tags" :key="tag.index">
+          <button @click="clearFilter()">All</button>
+          <button v-for="option in tag" :key="option.index" @click="filterPosts(option.name)" :class="selectedTag == option.name ? 'selected' : ''">{{option.name}}</button>
+        </div>
+      </div>
+      {{postsAmount}}
+      <section class="posts" :data-layout="layout">
+          <nuxt-link class="post" v-for="post in (filteredPosts.length > 0 ? filteredPosts : posts)" :key="post.index" :to="`/posts/${post.slug}`">
+              <img :src="post.content.post_icon" class="post_icon"/>
+              <div class="post-content">
+                <div class="post-name">{{post.name}}</div>
+                <div class="post-date">{{$moment(post.created_at).format('dddd Do MMMM YYYY')}}</div>
               </div>
-            </div>
-        </nuxt-link>
-    </section>
+          </nuxt-link>
+      </section>
+  </main>
 </template>
-
-<style lang="scss" scoped>
-.posts{
-    width: 100%;
-    padding-top: 25px;
-    &[data-layout="grid"]{
-      border-top: 1px solid #212121;
-      @include breakpoint(up,tablet-landscape){
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-      }
-      .post{
-          border-radius: 3px;
-          padding: 1rem;
-          border: 1px solid #212121;
-          &:not(:last-of-type){
-            margin:0 0 1rem;
-            @include breakpoint(up,tablet-landscape){
-              margin:0;
-            }
-          }
-      }
-    }
-    &[data-layout="list"]{
-        .post{
-            border-bottom: 1px solid #212121;
-            &:not(:last-of-type){
-                margin: 0 0 1rem;
-            }
-        }
-    }
-    .post{
-      display: flex;
-      flex-direction: column;
-      transition: all 0.35s;
-      &:hover{
-        box-shadow: 0 5px 10px rgba(#000,0.35);
-        transform: translateY(-10px);
-      }
-      &-date{
-        font-size: 0.775rem;
-      }
-      &-name{
-        padding:1rem 0;
-        font-weight: bold;
-        font-size: 1.15rem;
-      }
-      &-continue{
-        margin-top: auto;
-        a{
-          font-size: 0.775rem;
-          font-weight: bold;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-        }
-      }
-    }
-}
-</style>
 
 <script>
 export default {
     props: [
         'layout',
-        'tag'
+        'tag',
+        'include_search',
+        'amount'
     ],
     computed:{
         posts(){
+          if(this.amount){
+            return this.$store.state.posts.posts.slice(0,this.amount);
+          } else {
             return this.$store.state.posts.posts;
+          }
         },
+        tags(){
+          return this.$store.state.posts.tags
+        }
+    },
+    data(){
+      return{
+        filteredPosts: [],
+        selectedTag:'All'
+      }
+    },
+    methods:{
+      filterPosts(searchFilter){
+        this.selectedTag = searchFilter
+
+        this.filteredPosts = this.posts.filter(function(post){
+          return post.tag_list.includes(searchFilter)
+        })
+      },
+      clearFilter(){
+        this.selectedTag = 'All'
+        this.filteredPosts = []
+      }
     },
     created() {
         this.$store.dispatch("posts/getPosts");
+        this.$store.dispatch("posts/getTags");
     },
 }
 </script>
+
+<style lang="scss" scoped>
+.filter{
+  input{
+    width: 100%;
+    border:1px solid #212121;
+    padding:1rem;
+    display: block;
+    height: auto;
+    background:rgba(0,0,0,0);
+    appearance: none;
+    border-radius: 3px;
+    margin: 0 0 1rem;
+  }
+  .filters{
+    display: flex;
+    button{
+      color:var(--color-text);
+      background:#333;
+      padding:0.5rem;
+      border-radius: 3px;
+      &:not(:last-of-type){
+        margin-right: 0.5rem;
+      }
+      &.selected{
+        background:#27ae60;
+      }
+    }
+  }
+}
+.posts{
+    width: 100%;
+    padding-top: 25px;
+  .post{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      transition: all 0.35s;
+
+      &:not(:last-of-type){
+          margin: 0 0 2rem;
+          padding: 0 0 2rem;
+          border-bottom: 1px solid #222;
+      }
+      &-date{
+        font-size: 0.775rem;
+      }
+      &_icon{
+        max-height: 2rem;
+        max-width: 2rem;
+        margin:0 1.5rem 0 0;
+      }
+      &-name{
+        padding:0 0 0.5rem;
+        font-family: var(--accent-font);
+        font-size: 1.15rem;
+      }
+    }
+}
+</style>
