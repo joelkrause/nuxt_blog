@@ -7,6 +7,7 @@
         </div>
         <div class="content">
           <div v-html="richtext"></div>
+          <gh-btns-follow user="joelkrause" show-count></gh-btns-follow>
         </div>
       </div>
     </div>
@@ -51,9 +52,11 @@ export default {
   min-height: 20vw;
   margin: 0 0 5vw;
   .container{    
-    padding:10vw 0;
+    padding-top: 10vw;
+    padding-bottom: 10vw;
     @include breakpoint(up, tablet-landscape){
-      padding:5vw 0;
+      padding-top: 5vw;
+      padding-bottom: 5vw;
       display: flex;
       align-items: center;
     }

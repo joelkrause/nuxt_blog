@@ -18,9 +18,8 @@ header{
     padding:1rem;
     display: flex;
     justify-content: space-between;
-    font-family: var(--accent-font);
     @include breakpoint(up, tablet-landscape){
-        padding:5rem;
+        padding:3rem;
     }
     nav{
         display: flex;

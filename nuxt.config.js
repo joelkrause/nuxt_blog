@@ -63,6 +63,7 @@ export default {
     '@nuxtjs/moment',
     'nuxt-lazy-load',
     'nuxt-svg-loader',
+    'vue-github-buttons/nuxt',
     ['storyblok-nuxt', {
       accessToken: 'sZUcBEZiCUQNtT3CQAZrzgtt',
       cacheProvider: 'memory'

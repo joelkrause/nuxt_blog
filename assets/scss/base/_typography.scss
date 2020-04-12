@@ -1,12 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
-
-@font-face {
-    font-family: 'KonstantGrotesk';
-    src: url('/fonts/KonstantGroteskBook.woff2') format('woff2'),
-        url('/fonts/KonstantGroteskBook.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
 
 body {
     font-family: sans-serif;
@@ -17,7 +9,7 @@ body {
     -webkit-font-smoothing: antialiased;
     text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
     font-family: var(--sans-font);
-    // font-size: 1.15rem;
+    font-size: 1.15rem;
 }
 
 p {

@@ -5,14 +5,17 @@ body {
 
 ::selection{
     background-color: #000;
+    opacity: 0.75;
 }
 
 .container {
     margin: 0 auto;
-    padding: 0 1rem;
-
+    padding-left: 1rem;
+    padding-right: 1rem;
+    
     @include breakpoint(up, tablet-landscape) {
-        padding: 0 2rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
         max-width: 65vw;
     }
 }

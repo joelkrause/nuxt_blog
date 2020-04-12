@@ -17,7 +17,8 @@
     "nuxt": "^2.0.0",
     "nuxt-lazy-load": "^1.1.9",
     "nuxt-svg-loader": "^1.2.0",
-    "storyblok-nuxt": "^1.2.0"
+    "storyblok-nuxt": "^1.2.0",
+    "vue-github-buttons": "^3.1.0"
   },
   "devDependencies": {
     "@nuxtjs/moment": "^1.6.0",

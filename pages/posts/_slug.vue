@@ -21,6 +21,9 @@ header{
     margin: 0 0 5vw;
     display: flex;
     flex-direction: column;
+    h1{
+        font-weight: bold;
+    }
     .date{
         display: flex;
         align-items: flex-start;

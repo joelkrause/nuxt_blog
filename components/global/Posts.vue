@@ -1,13 +1,11 @@
 <template>
   <main>
       <div class="filter" v-if="include_search">
-        <input type="search" placeholder="Search posts...">
         <div class="filters" v-for="tag in tags" :key="tag.index">
-          <button @click="clearFilter()">All</button>
+          <button @click="clearFilter()" :class="selectedTag == 'All' ? 'selected' : ''">All</button>
           <button v-for="option in tag" :key="option.index" @click="filterPosts(option.name)" :class="selectedTag == option.name ? 'selected' : ''">{{option.name}}</button>
         </div>
       </div>
-      {{postsAmount}}
       <section class="posts" :data-layout="layout">
           <nuxt-link class="post" v-for="post in (filteredPosts.length > 0 ? filteredPosts : posts)" :key="post.index" :to="`/posts/${post.slug}`">
               <img :src="post.content.post_icon" class="post_icon"/>
@@ -83,7 +81,7 @@ export default {
     display: flex;
     button{
       color:var(--color-text);
-      background:#333;
+      background:var(--accent-color);
       padding:0.5rem;
       border-radius: 3px;
       &:not(:last-of-type){
@@ -121,6 +119,7 @@ export default {
         padding:0 0 0.5rem;
         font-family: var(--accent-font);
         font-size: 1.15rem;
+        font-weight: bold;
       }
     }
 }
