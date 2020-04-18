@@ -2,7 +2,7 @@
   <main>
     <header class="post_header hero">
       <div class="container">
-      <h2>All Posts</h2>
+      <h1>All Posts</h1>
       </div>
     </header>
     <div class="container">

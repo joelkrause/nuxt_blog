@@ -24,7 +24,7 @@ pre {
             margin: 2rem 0 0;
 
             @include breakpoint(up, laptop) {
-                margin: 3rem 0 3rem calc((75vw - 65vw) / 2 * -1);
+                margin: 3rem 0 3rem calc((75vw - 55vw) / 2 * -1);
             }
 
             &.language-javascript {

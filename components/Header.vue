@@ -17,14 +17,21 @@ header{
     top:0;
     padding:1rem;
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    font-weight: 600;
+    letter-spacing: 0.0125rem;
     @include breakpoint(up, tablet-landscape){
-        padding:3rem;
+        padding:2rem;
     }
     nav{
         display: flex;
+        @include breakpoint(up,laptop){
+            /* padding-left: 2rem; */
+        }
         a{
             position: relative;
+            /* font-size: 0.9rem; */
             &:not(:last-of-type){
                 margin-right: 1.25rem;
             }
@@ -74,7 +81,7 @@ export default {
         }
     },
     methods:{
-        toggleMode(){
+        toggleDarkMode(){
             this.darkMode = !this.darkMode
         }
     }

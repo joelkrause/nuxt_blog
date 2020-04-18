@@ -102,10 +102,10 @@ export default {
       align-items: center;
       transition: all 0.35s;
 
-      &:not(:last-of-type){
+      /deep/ &:not(:last-of-type){
           margin: 0 0 2rem;
           padding: 0 0 2rem;
-          border-bottom: 1px solid #222;
+          border-bottom: 1px solid var(--accent-color);
       }
       &-date{
         font-size: 0.775rem;
