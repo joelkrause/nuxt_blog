@@ -61,12 +61,6 @@ header{
 <script>
 export default {
     computed: {
-        posts() {
-            return this.$store.state.posts.posts;
-        },
-        story() {
-            return this.posts.find(el => el.slug === this.slug);
-        },
         richtext() {
             return this.story.content ? this.$storyapi.richTextResolver.render(this.story.content.body) : ''
         },
@@ -74,14 +68,9 @@ export default {
             return this.story.content.excerpt ? this.$storyapi.richTextResolver.render(this.story.content.excerpt) : ''
         }
     },
-    data() {
-        return {
-            slug: this.$route.params.slug,
-            
-        };
-    },
-    created() {
-        this.$store.dispatch("posts/getPosts");
+    async asyncData(context){
+        const {data} = await context.app.$storyapi.get(`cdn/stories/posts/${context.params.slug}`)
+        return { story: data.story }
     },
     head () {
         return {

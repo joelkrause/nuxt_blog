@@ -9,13 +9,9 @@
 
 <script>
 export default {
-computed:{
-    page(){
-        return this.$store.state.pages.pages.find(el => el.slug === 'contact');
-    },
-},
-created(){
-    this.$store.dispatch("pages/getPages");
+async asyncData(context){
+    const {data} = await context.app.$storyapi.get(`cdn/stories/pages/contact`)
+    return { page: data.story }
 },
 head () {
     return {

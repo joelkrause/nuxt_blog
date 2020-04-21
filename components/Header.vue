@@ -4,10 +4,13 @@
             <nuxt-link to="/">Joel Krause.</nuxt-link>
         </div>
         <nav>
-            <nuxt-link to="/">Home</nuxt-link>
             <nuxt-link to="/posts">Posts</nuxt-link>
+            <nuxt-link to="/about">About</nuxt-link>
             <nuxt-link to="/contact">Contact</nuxt-link>
         </nav>
+        <div class="socials">
+            socials
+        </div>
     </header>
 </template>
 
@@ -18,7 +21,6 @@ header{
     padding:1rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     font-weight: 600;
     letter-spacing: 0.0125rem;
     @include breakpoint(up, tablet-landscape){
@@ -27,11 +29,11 @@ header{
     nav{
         display: flex;
         @include breakpoint(up,laptop){
-            /* padding-left: 2rem; */
+            padding-left: 2rem;
         }
         a{
             position: relative;
-            /* font-size: 0.9rem; */
+            font-size: 0.875rem;
             &:not(:last-of-type){
                 margin-right: 1.25rem;
             }
@@ -62,6 +64,12 @@ header{
                 color:var(--text-color);
             }
         }
+    }
+    .socials{
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-end;
+
     }
 }
 </style>

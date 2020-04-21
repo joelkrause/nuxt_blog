@@ -29,20 +29,18 @@ export default {
     Posts
   },
   computed:{
-    home(){
-      return this.$store.state.pages.pages.find(el => el.slug === 'home');
-    },
     richtext() {
         return this.$storyapi.richTextResolver.render(this.home.content.hero_content)
     }
   },
-  created() {
-    this.$store.dispatch("pages/getPages");
+  async asyncData(context){
+      const {data} = await context.app.$storyapi.get(`cdn/stories/pages/home`)
+      return { home: data.story }
   },
   head () {
-      return {
+    return {
       title: 'Home',
-      }
+    }
   },
 }
 </script>
