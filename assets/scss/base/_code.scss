@@ -1,51 +1,50 @@
 code {
-    background:var(--accent-color);
-    border-radius: 3px;
-    font-size: 0.875rem;
-    display: inline-block;
-    padding: 0 0.5rem 0.15rem;
+  background: var(--accent-color);
+  border-radius: 3px;
+  font-size: 0.875rem;
+  display: inline-block;
+  padding: 0 0.5rem 0.15rem;
 
-    @include breakpoint(up, laptop) {
-        padding: 0 0.5rem;
-    }
+  @include breakpoint(up, laptop) {
+    padding: 0 0.5rem;
+  }
 }
 
 pre {
-    code {
-        position: relative;
-        width: 100%;
+  code {
+    position: relative;
+    width: 100%;
+
+    @include breakpoint(up, laptop) {
+      width: 75vw;
+    }
+
+    &[class*='language'] {
+      padding: 1rem;
+      margin: 2rem 0 0;
+
+      @include breakpoint(up, laptop) {
+        margin: 3rem 0 3rem calc((75vw - 55vw) / 2 * -1);
+      }
+
+      &.language-javascript {
+        &::before {
+          content: 'Javascript';
+        }
+      }
+
+      &::before {
+        content: 'Language';
+        position: absolute;
+        bottom: calc(100% + 15px);
+        right: 0;
+        font-family: var(--sans-font);
+        font-size: 0.675rem;
 
         @include breakpoint(up, laptop) {
-            width: 75vw;
+          font-size: 0.875rem;
         }
-
-        &[class*='language'] {
-            padding: 1rem;
-            margin: 2rem 0 0;
-
-            @include breakpoint(up, laptop) {
-                margin: 3rem 0 3rem calc((75vw - 55vw) / 2 * -1);
-            }
-
-            &.language-javascript {
-                &:before {
-                    content: 'Javascript';
-                }
-            }
-
-            &:before {
-                content: 'Language';
-                position: absolute;
-                bottom: calc(100% + 15px);
-                right: 0;
-                font-family: var(--sans-font);
-                font-size: 0.675rem;
-
-
-                @include breakpoint(up, laptop) {
-                    font-size: 0.875rem;
-                }
-            }
-        }
+      }
     }
+  }
 }

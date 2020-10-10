@@ -1,54 +1,49 @@
 export default {
-  mode: 'universal',
+  mode: "universal",
   /*
    ** Headers of the page
    */
   head: {
     titleTemplate: `%s - Joel Krause`,
-    meta: [{
-        charset: 'utf-8'
+    meta: [
+      {
+        charset: "utf-8",
       },
       {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
+        name: "viewport",
+        content: "width=device-width, initial-scale=1",
       },
 
       // hid is used as unique identifier. Do not use `vmid` for it as it will not work
       {
-        hid: 'description',
-        name: 'description',
-        content: 'I\'m a frontend web developer from Melbourne. I build lightning fast websites with nuxt and storyblok.'
-      }
-    ]
+        hid: "description",
+        name: "description",
+        content:
+          "I'm a frontend web developer from Melbourne. I build lightning fast websites with nuxt and storyblok.",
+      },
+    ],
   },
   /*
    ** Customize the progress-bar color
    */
   loading: {
-    color: '#27ae60'
+    color: "#27ae60",
   },
   pageTransition: {
     name: "default",
-    mode: "out-in"
+    mode: "out-in",
   },
   /*
    ** Global CSS
    */
-  css: [
-    '@/assets/scss/app.scss'
-  ],
+  css: ["@/assets/scss/app.scss"],
   styleResources: {
-    scss: [
-      'assets/scss/utils/_functions.scss',
-    ]
+    scss: ["assets/scss/utils/_functions.scss"],
   },
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    `~/plugins/posts.server.js`,
-    `~/plugins/pages.server.js`,
-  ],
+  plugins: [`~/plugins/posts.server.js`, `~/plugins/pages.server.js`],
   /*
    ** Nuxt.js dev-modules
    */
@@ -58,16 +53,19 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/style-resources',
-    '@nuxtjs/moment',
-    'nuxt-lazy-load',
-    'nuxt-svg-loader',
-    'vue-github-buttons/nuxt',
-    ['storyblok-nuxt', {
-      accessToken: 'sZUcBEZiCUQNtT3CQAZrzgtt',
-      cacheProvider: 'memory'
-    }]
+    "@nuxtjs/axios",
+    "@nuxtjs/style-resources",
+    "@nuxtjs/moment",
+    "nuxt-lazy-load",
+    "nuxt-svg-loader",
+    "vue-github-buttons/nuxt",
+    [
+      "storyblok-nuxt",
+      {
+        accessToken: "sZUcBEZiCUQNtT3CQAZrzgtt",
+        cacheProvider: "memory",
+      },
+    ],
   ],
   /*
    ** Build configuration
@@ -76,6 +74,19 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
-  }
-}
+    extend(config, ctx) {
+      // Run ESLint on save
+      if (ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: "pre",
+          test: /\.(js|vue)$/,
+          loader: "eslint-loader",
+          exclude: /(node_modules)/,
+          options: {
+            fix: true,
+          },
+        });
+      }
+    },
+  },
+};

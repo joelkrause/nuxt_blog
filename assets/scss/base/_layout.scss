@@ -1,36 +1,36 @@
 body {
-    background: var(--bg-color);
-    color: var(--text-color);
+  background: var(--bg-color);
+  color: var(--text-color);
 }
 
-::selection{
-    background-color: #000;
-    opacity: 0.75;
+::selection {
+  background-color: #000;
+  opacity: 0.75;
 }
 
 .container {
-    margin: 0 auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    
-    @include breakpoint(up, tablet-landscape) {
-        padding-left: 2rem;
-        padding-right: 2rem;
-        max-width: 55vw;
-    }
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  @include breakpoint(up, tablet-landscape) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    max-width: 55vw;
+  }
 }
 
 .categories {
-    display: flex;
+  display: flex;
 
-    .category {
-        font-size: 0.775rem;
-        text-transform: uppercase;
-        border-radius: 2px;
-        letter-spacing: 0.5px;
+  .category {
+    font-size: 0.775rem;
+    text-transform: uppercase;
+    border-radius: 2px;
+    letter-spacing: 0.5px;
 
-        &:not(:last-of-type) {
-            margin-right: 0.5rem;
-        }
+    &:not(:last-of-type) {
+      margin-right: 0.5rem;
     }
+  }
 }

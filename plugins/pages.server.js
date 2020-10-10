@@ -1,5 +1,3 @@
-export default async ({
-    store
-}) => {
-    await store.dispatch('pages/getPages')
-}
+export default async ({ store }) => {
+  await store.dispatch("pages/getPages");
+};

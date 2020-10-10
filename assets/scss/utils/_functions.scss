@@ -1,40 +1,40 @@
 // Responsive Breakpoints
 $breakpoints: (mobile: 480px,
-    tablet-portrait: 768px,
-    tablet-landscape: 1024px,
-    laptop: 1200px,
-    desktop: 1400px,
-    desktop_large: 1920px,
+tablet-portrait: 768px,
+tablet-landscape: 1024px,
+laptop: 1200px,
+desktop: 1400px,
+desktop_large: 1920px,
 );
 
 @mixin breakpoint($direction, $breakpoint) {
-    @if $direction=='up' {
-        @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
-            @content;
-        }
+  @if $direction=='up' {
+    @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
+      @content;
     }
+  }
 
-    @else {
-        @media (max-width: #{map-get($breakpoints, $breakpoint)}) {
-            @content;
-        }
+  @else {
+    @media (max-width: #{map-get($breakpoints, $breakpoint)}) {
+      @content;
     }
+  }
 }
 
 // Convert PX to REM
 @function rem($size) {
-    $remSize: $size / 16px;
-    //Default font size on html element is 100%, equivalent to 16px;
-    @return #{$remSize}rem;
+  $remSize: $size / 16px;
+  //Default font size on html element is 100%, equivalent to 16px;
+  @return #{$remSize}rem;
 }
 
 // H Tags
 @function headings($from:1, $to:6) {
-    @if $from==$to {
-        @return 'h#{$from}';
-    }
+  @if $from==$to {
+    @return 'h#{$from}';
+  }
 
-    @else {
-        @return 'h#{$from},'+headings($from+1, $to);
-    }
+  @else {
+    @return 'h#{$from},'+headings($from+1, $to);
+  }
 }
